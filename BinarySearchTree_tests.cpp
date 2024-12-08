@@ -54,6 +54,20 @@ TEST(empty_tree) {
     ASSERT_TRUE(tree.max_element() == tree.end());
     ASSERT_TRUE(tree.min_greater_than(3) == tree.end());
 }
+TEST(copy_empty_tree) {
+  BinarySearchTree<int> tree;
+  BinarySearchTree<int> copy1(tree);
+
+  tree.insert(1);
+  ASSERT_TRUE(tree.size()==1);
+  ASSERT_TRUE(copy1.size()==0);
+
+  copy1.insert(2);
+  copy1.insert(3);
+  ASSERT_TRUE(tree.size()==1);
+  ASSERT_TRUE(copy1.size()==2);
+
+}
 
 TEST(copy_constructor) {
     BinarySearchTree<int> tree;
@@ -101,6 +115,23 @@ TEST(find) {
   ASSERT_TRUE(tree.find(2) != tree.end());
   ASSERT_TRUE(tree.find(3) != tree.end());
   ASSERT_TRUE(tree.find(5) == tree.end());
+}
+TEST(sorting_invariant) {
+  BinarySearchTree<int> tree;
+  tree.insert(1);
+  tree.insert(2);
+  tree.insert(3);
+  tree.insert(4);
+  tree.insert(5);
+
+  ASSERT_TRUE(tree.check_sorting_invariant());
+  *tree.begin() = 10;
+  ASSERT_FALSE(tree.check_sorting_invariant());
+  *tree.begin() = 1;
+   auto it = tree.begin();
+   ++it;
+  *it = 50;
+  ASSERT_FALSE(tree.check_sorting_invariant());
 }
 
 TEST_MAIN()
