@@ -14,6 +14,8 @@ TEST(test_general_1) {
   ASSERT_TRUE(tree.height() == 1);
 
   ASSERT_TRUE(tree.find(5) != tree.end());
+  ASSERT_TRUE(*tree.find(5) == 5)
+  ASSERT_TRUE(tree.find(7) == tree.end());
 
   tree.insert(7);
   tree.insert(3);
