@@ -91,5 +91,16 @@ TEST(copy_constructor) {
     ASSERT_TRUE(copy_tree.height()==8);
 
 }
+TEST(find) {
+  BinarySearchTree<int> tree;
+  tree.insert(1);
+  tree.insert(2);
+  tree.insert(3);
+
+  ASSERT_TRUE(tree.find(1) != tree.end());
+  ASSERT_TRUE(tree.find(2) != tree.end());
+  ASSERT_TRUE(tree.find(3) != tree.end());
+  ASSERT_TRUE(tree.find(5) == tree.end());
+}
 
 TEST_MAIN()
